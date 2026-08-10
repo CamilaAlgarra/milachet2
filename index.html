@@ -1,254 +1,196 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Milachet</title>
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Galindo&family=Satisfy&display=swap" rel="stylesheet">
-
-
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milachet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Galindo&family=Satisfy&family=Fraunces:opsz,wght@9..144,300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-
-<header class="main-header">
-  <img src="assets/img/Logo final.png"
-    alt="Logo de Milachet"
-    width="200">
-
-
-    <h1 class="title">
-        Milachet
-    </h1>
-  <nav>
-
-        <ul>
-
-            <li>
-                <a href="#sobre">Sobre nosotros</a>
-            </li>
-
-            <li>
-                <a href="#productos">Productos</a>
-            </li>
-
-            <li>
-                <a href="#contacto">Contacto</a>
-            </li>
-
-        </ul>
-
-    </nav>
-
-</header>
-
-<section class="hero">
-
-    <h2>
-        Creaciones únicas hechas a crochet
-    </h2>
-
-    <p>
-        Diseños artesanales personalizados con amor, creatividad y dedicación.
-    </p>
-
-</section>
-
-<section id="sobre" class="main-section">
-
-<h2>Sobre nosotros</h2>
-
-<h3>¿Qué es Milachet?</h3>
-
-<p>
-Milachet es un emprendimiento dedicado a la creación y venta de productos tejidos a crochet con diseños personalizados.
-</p>
-
-<h3>Visión</h3>
-
-<p>
-Ser una marca reconocida por la calidad y creatividad de nuestros productos.
-</p>
-
-<h3>Misión</h3>
-
-<p>
-Diseñar y comercializar productos tejidos a crochet que reflejen creatividad, calidad y dedicación.
-</p>
-
-<h3>Objetivos</h3>
-
-<ol>
-
-<li>Ofrecer productos de calidad.</li>
-
-<li>Generar confianza en nuestros clientes.</li>
-
-<li>Crear una comunidad de amantes del crochet.</li>
-
-</ol>
-
-</section>
-
-<section id="productos" class="main-section">
-
-<h2>Productos</h2>
-
-
-<div class="catalogo">
-
-
-    <div class="producto">
-
-        <h3>Bufanda</h3>
-
-        <p>
-        Bufanda tejida a crochet con diseño personalizado.
-        </p>
-
-        <strong>$45.000</strong>
-
+    <!-- Barra de anuncio superior -->
+    <div class="announcement-bar">
+        CREACIONES HECHAS A MANO CON AMOR Y DEDICACIÓN
     </div>
 
+    <!-- Encabezado con logo y menú alineados -->
+    <header class="main-header">
+        <div class="header-logo">
+            <img src="assets/img/Logo final.png" alt="Logo de Milachet">
+        </div>
+        <nav class="main-nav">
+            <ul class="menu">
+                <li><a href="#sobre" class="menu-link">Sobre nosotros</a></li>
+                <li><a href="#productos" class="menu-link">Productos</a></li>
+                <li><a href="#contacto" class="menu-link">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <!-- Hero en 2 Columnas (Texto + Imagen lateral) -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Creaciones únicas hechas a crochet</h2>
+            <p>Diseños artesanales personalizados con amor, creatividad y dedicación.</p>
+            <a href="#productos" class="btn-hero">Ver Productos</a>
+        </div>
+        <div class="hero-image-container">
+            <img src="assets/img/Logo final.png" alt="Imagen Destacada Milachet">
+        </div>
+    </section>
 
-    <div class="producto">
+    <!-- Sección Sobre Nosotros -->
+    <section id="sobre" class="main-section">
+        <div class="section-title-wrapper">
+            <h2>Sobre nosotros</h2>
+        </div>
+        
+        <div class="sobre-grid">
+            <div class="info-card">
+                <h3>¿Qué es Milachet?</h3>
+                <p>Milachet es un emprendimiento dedicado a la creación y venta de productos tejidos a crochet con diseños personalizados.</p>
+            </div>
+            <div class="info-card">
+                <h3>Misión</h3>
+                <p>Diseñar y comercializar productos tejidos a crochet que reflejen creatividad, calidad y dedicación.</p>
+            </div>
+            <div class="info-card">
+                <h3>Visión</h3>
+                <p>Ser una marca reconocida por la calidad y creatividad de nuestros productos.</p>
+            </div>
+        </div>
 
-        <h3>Bolso</h3>
+        <div class="objetivos-card">
+            <h3>Objetivos</h3>
+            <ol>
+                <li>Ofrecer productos de calidad.</li>
+                <li>Generar confianza en nuestros clientes.</li>
+                <li>Crear una comunidad de amantes del crochet.</li>
+            </ol>
+        </div>
+    </section>
 
-        <p>
-        Bolso tejido a crochet con diseño personalizado.
+    <!-- Sección Productos en Tarjetas Elegantes -->
+    <section id="productos" class="main-section">
+        <div class="section-title-wrapper">
+            <h2>Productos</h2>
+        </div>
+
+        <div class="catalogo">
+            <div class="producto">
+                <div class="producto-img-placeholder">
+                    <img src="assets/img/Logo final.png" alt="Bufanda">
+                </div>
+                <div class="producto-info">
+                    <h3>Bufanda</h3>
+                    <p>Bufanda tejida a crochet con diseño personalizado.</p>
+                    <span class="precio">$45.000</span>
+                    <a href="#contacto" class="btn-producto">Ordenar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img-placeholder">
+                    <img src="assets/img/Logo final.png" alt="Bolso">
+                </div>
+                <div class="producto-info">
+                    <h3>Bolso</h3>
+                    <p>Bolso tejido a crochet con diseño personalizado.</p>
+                    <span class="precio">$65.000</span>
+                    <a href="#contacto" class="btn-producto">Ordenar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img-placeholder">
+                    <img src="assets/img/Logo final.png" alt="Llaveros">
+                </div>
+                <div class="producto-info">
+                    <h3>Llaveros</h3>
+                    <p>Llaveros tejidos con diseños personalizados.</p>
+                    <span class="precio">Según diseño</span>
+                    <a href="#contacto" class="btn-producto">Ordenar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img-placeholder">
+                    <img src="assets/img/Logo final.png" alt="Separadores">
+                </div>
+                <div class="producto-info">
+                    <h3>Separadores</h3>
+                    <p>Separadores tejidos a crochet.</p>
+                    <span class="precio">$15.000</span>
+                    <a href="#contacto" class="btn-producto">Ordenar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img-placeholder">
+                    <img src="assets/img/Logo final.png" alt="Aretes">
+                </div>
+                <div class="producto-info">
+                    <h3>Aretes</h3>
+                    <p>Aretes tejidos con diseños personalizados.</p>
+                    <span class="precio">$15.000</span>
+                    <a href="#contacto" class="btn-producto">Ordenar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de Contacto -->
+    <section id="contacto" class="main-section">
+        <div class="section-title-wrapper">
+            <h2>Contáctanos</h2>
+        </div>
+
+        <form class="contacto-form">
+            <fieldset>
+                <legend>Información de Contacto</legend>
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="correo">Correo:</label>
+                    <input type="email" id="correo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono">
+                </div>
+
+                <div class="form-group">
+                    <label for="producto">Producto de interés:</label>
+                    <input type="text" id="producto">
+                </div>
+
+                <div class="form-actions">
+                    <input type="submit" value="Enviar">
+                    <input type="reset" value="Limpiar">
+                </div>
+            </fieldset>
+        </form>
+    </section>
+
+    <footer>
+        <p class="instagram-text">
+            Síguenos en Instagram:
+            <a href="https://www.instagram.com/milachett/" target="_blank">@milachett</a>
         </p>
-
-        <strong>$65.000</strong>
-
-    </div>
-
-
-
-    <div class="producto">
-
-        <h3>Llaveros</h3>
-
-        <p>
-        Llaveros tejidos con diseños personalizados.
-        </p>
-
-        <strong>Según diseño</strong>
-
-    </div>
-
-
-
-    <div class="producto">
-
-        <h3>Separadores</h3>
-
-        <p>
-        Separadores tejidos a crochet.
-        </p>
-
-        <strong>$15.000</strong>
-
-    </div>
-
-
-
-    <div class="producto">
-
-        <h3>Aretes</h3>
-
-        <p>
-        Aretes tejidos con diseños personalizados.
-        </p>
-
-        <strong>$15.000</strong>
-
-    </div>
-
-
-</div>
-
-
-</section>
-
-</section>
-
-<section id="contacto" class="main-section">
-
-<h2>Contáctanos</h2>
-
-<form>
-
-<fieldset>
-
-<legend>Información</legend>
-
-<label for="nombre">Nombre:</label>
-
-<input type="text" id="nombre" required>
-
-<br><br>
-
-<label for="apellido">Apellido:</label>
-
-<input type="text" id="apellido" required>
-
-<br><br>
-
-<label for="correo">Correo:</label>
-
-<input type="email" id="correo" required>
-
-<br><br>
-
-<label for="telefono">Teléfono:</label>
-
-<input type="tel" id="telefono">
-
-<br><br>
-
-<label for="producto">Producto de interés:</label>
-
-<input type="text" id="producto">
-
-<br><br>
-
-<input type="submit" value="Enviar">
-
-<input type="reset" value="Limpiar">
-
-</fieldset>
-
-</form>
-
-</section>
-
-<footer>
-
-    <p>
-      <p class="instagram-text">
-    Síguenos en Instagram:
-    <a href="https://www.instagram.com/milachett/" target="_blank">
-        @milachett
-    </a>
-</p>
-    </p>
-
-</footer>
+    </footer>
 
 </body>
-
 </html>
