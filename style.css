@@ -367,3 +367,80 @@ footer {
     justify-content: center;
   }
 }
+
+/* --- BOTÓN Y DESPLEGABLE EN LAS TARJETAS --- */
+details.detalles-producto summary.btn-hero {
+  list-style: none; 
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+details.detalles-producto summary.btn-hero::-webkit-details-marker {
+  display: none; 
+}
+
+.contenido-desplegable {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px dashed #e0d2e5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.titulo-estilos {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  color: #5a4b5e;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.mini-galeria.active-galeria {
+  display: flex !important;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.item-galeria {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  margin: 0;
+}
+
+.item-galeria img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #d6cadd;
+  cursor: pointer;
+}
+
+.item-galeria figcaption {
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+  color: #3b4256;
+  margin: 0;
+}
+
+.btn-pedir {
+  background-color: #463b4b;
+  color: #ffffff;
+  padding: 8px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Fraunces', serif;
+  display: inline-block;
+}
+
+.btn-pedir:hover {
+  background-color: #5a4b5e;
+}

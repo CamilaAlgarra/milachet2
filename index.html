@@ -75,11 +75,13 @@
 
     <!-- Sección Productos en Tarjetas Elegantes -->
     <section id="productos" class="main-section">
-        <div class="section-title-wrapper">
+       <div class="section-title-wrapper">
             <h2>Productos</h2>
         </div>
 
-        <div class="catalogo">
+   <div class="catalogo">
+            
+            <!-- PRODUCTO 1: BUFANDA -->
             <div class="producto">
                 <div class="producto-img-placeholder">
                     <img src="assets/img/Bufanda-Dos-Colores.jpeg" alt="Bufanda">
@@ -88,10 +90,24 @@
                     <h3>Bufanda</h3>
                     <p>Bufanda tejida a crochet con diseño personalizado.</p>
                     <span class="precio">$45.000</span>
-                    <a href="#contacto" class="btn-producto">Ordenar</a>
+
+                    <details class="detalles-producto">
+                        <summary class="btn-hero">Ver Estilos</summary>
+                        <div class="contenido-desplegable">
+                            <p class="titulo-estilos">Estilos:</p>
+                            <div class="mini-galeria active-galeria">
+                                <figure class="item-galeria">
+                                    <img src="assets/img/Bufanda-Dos-Colores.jpeg" alt="Bufanda Dos Tonos" onclick="seleccionarFoto(this, 'Bufanda Dos Tonos')">
+                                    <figcaption>Bufanda Dos Tonos</figcaption>
+                                </figure>
+                            </div>
+                            <a href="#contacto" class="btn-pedir">Pedir</a>
+                        </div>
+                    </details>
                 </div>
             </div>
 
+            <!-- PRODUCTO 2: BOLSO -->
             <div class="producto">
                 <div class="producto-img-placeholder">
                     <img src="assets/img/Bolso-Morado-Flores.jpeg" alt="Bolso">
@@ -100,10 +116,28 @@
                     <h3>Bolso</h3>
                     <p>Bolso tejido a crochet con diseño personalizado.</p>
                     <span class="precio">$65.000</span>
-                    <a href="#contacto" class="btn-producto">Ordenar</a>
+
+                    <details class="detalles-producto">
+                        <summary class="btn-hero">Ver Estilos</summary>
+                        <div class="contenido-desplegable">
+                            <p class="titulo-estilos">Estilos:</p>
+                            <div class="mini-galeria active-galeria">
+                                <figure class="item-galeria">
+                                    <img src="assets/img/Bolso-Morado-Flores.jpeg" alt="Bolso Flores" onclick="seleccionarFoto(this, 'Bolso Morado Flores')">
+                                    <figcaption>Bolso de Flores</figcaption>
+                                </figure>
+                                <figure class="item-galeria">
+                                    <img src="assets/img/Bolso-Granny.jpeg" alt="Bolso Granny" onclick="seleccionarFoto(this, 'Bolso Granny')">
+                                    <figcaption>Bolso Granny</figcaption>
+                                </figure>
+                            </div>
+                            <a href="#contacto" class="btn-pedir">Pedir</a>
+                        </div>
+                    </details>
                 </div>
             </div>
 
+            <!-- PRODUCTO 3: LLAVEROS -->
             <div class="producto">
                 <div class="producto-img-placeholder">
                     <img src="assets/img/logo-final.png" alt="Llaveros">
@@ -112,10 +146,24 @@
                     <h3>Llaveros</h3>
                     <p>Llaveros tejidos con diseños personalizados.</p>
                     <span class="precio">Según diseño</span>
-                    <a href="#contacto" class="btn-producto">Ordenar</a>
+
+                    <details class="detalles-producto">
+                        <summary class="btn-hero">Ver Estilos</summary>
+                        <div class="contenido-desplegable">
+                            <p class="titulo-estilos">Estilos:</p>
+                            <div class="mini-galeria active-galeria">
+                                <figure class="item-galeria">
+                                    <img src="assets/img/logo-final.png" alt="Llavero Personalizado" onclick="seleccionarFoto(this, 'Llavero Personalizado')">
+                                    <figcaption>Llavero Personalizado</figcaption>
+                                </figure>
+                            </div>
+                            <a href="#contacto" class="btn-pedir">Pedir</a>
+                        </div>
+                    </details>
                 </div>
             </div>
 
+            <!-- PRODUCTO 4: SEPARADORES -->
             <div class="producto">
                 <div class="producto-img-placeholder">
                     <img src="assets/img/Separador-de-Colombia.jpeg" alt="Separadores">
@@ -124,10 +172,24 @@
                     <h3>Separadores</h3>
                     <p>Separadores tejidos a crochet.</p>
                     <span class="precio">$15.000</span>
-                    <a href="#contacto" class="btn-producto">Ordenar</a>
+
+                    <details class="detalles-producto">
+                        <summary class="btn-hero">Ver Estilos</summary>
+                        <div class="contenido-desplegable">
+                            <p class="titulo-estilos">Estilos:</p>
+                            <div class="mini-galeria active-galeria">
+                                <figure class="item-galeria">
+                                    <img src="assets/img/Separador-de-Colombia.jpeg" alt="Separador Bandera" onclick="seleccionarFoto(this, 'Separador Colombia')">
+                                    <figcaption>Separador Colombia</figcaption>
+                                </figure>
+                            </div>
+                            <a href="#contacto" class="btn-pedir">Pedir</a>
+                        </div>
+                    </details>
                 </div>
             </div>
 
+            <!-- PRODUCTO 5: ARETES -->
             <div class="producto">
                 <div class="producto-img-placeholder">
                     <img src="assets/img/Aretes-Circulo-Medio.jpeg" alt="Aretes">
@@ -136,11 +198,28 @@
                     <h3>Aretes</h3>
                     <p>Aretes tejidos con diseños personalizados.</p>
                     <span class="precio">$15.000</span>
-                    <a href="#contacto" class="btn-producto">Ordenar</a>
+
+                    <details class="detalles-producto">
+                        <summary class="btn-hero">Ver Estilos</summary>
+                        <div class="contenido-desplegable">
+                            <p class="titulo-estilos">Estilos:</p>
+                            <div class="mini-galeria active-galeria">
+                                <figure class="item-galeria">
+                                    <img src="assets/img/Aretes-Circulo-Medio.jpeg" alt="Aretes Círculo" onclick="seleccionarFoto(this, 'Aretes Círculo')">
+                                    <figcaption>Aretes Círculo Medio</figcaption>
+                                </figure>
+                                <figure class="item-galeria">
+                                    <img src="assets/img/Aretes-Flor.jpeg" alt="Aretes Flor" onclick="seleccionarFoto(this, 'Aretes Flor')">
+                                    <figcaption>Aretes Flor</figcaption>
+                                </figure>
+                            </div>
+                            <a href="#contacto" class="btn-pedir">Pedir</a>
+                        </div>
+                    </details>
                 </div>
             </div>
+
         </div>
-    </section>
 
     <!-- Formulario de Contacto -->
     <section id="contacto" class="main-section">
@@ -169,12 +248,12 @@
 
                 <div class="form-group">
                     <label for="telefono">Teléfono:</label>
-                    <input type="tel" id="telefono">
+                    <input type="tel" id="telefono" placeholder=" Ej. 555-1234">
                 </div>
 
                 <div class="form-group">
                     <label for="producto">Producto de interés:</label>
-                    <input type="text" id="producto">
+                    <input type="text" id="producto" placeholder=" Bolso Granny, Bufanda Dos Tonos, etc.">
                 </div>
 
                 <div class="form-actions">
