@@ -444,3 +444,23 @@ details.detalles-producto summary.btn-hero::-webkit-details-marker {
 .btn-pedir:hover {
   background-color: #5a4b5e;
 }
+/* Estilo seleccionado en la mini-galería */
+.item-galeria {
+  padding: 6px;
+  border-radius: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.item-galeria.foto-seleccionada {
+  background-color: var(--lila-pastel);
+}
+
+.item-galeria.foto-seleccionada img {
+  border-color: var(--rosa-hover);
+  box-shadow: 0 0 0 3px rgba(232, 158, 176, 0.35);
+}
+
+.item-galeria.foto-seleccionada figcaption {
+  color: var(--rosa-hover);
+  font-weight: 600;
+}
