@@ -9,7 +9,7 @@
   --texto-oscuro: #4a3e4e;
   --texto-suave: #7a6e7e;
 
-  /* Tipografías */
+  /* Tipos de fuente */
   --fuente-titulo: "Galindo", cursive;
   --fuente-texto: "Fraunces", serif;
 }
@@ -40,7 +40,7 @@ body {
   letter-spacing: 1px;
 }
 
-/* 2. ENCABEZADO Y MENÚ SIN VIÑETAS */
+
 .main-header {
   background-color: var(--fondo-crema);
   display: flex;
@@ -56,8 +56,8 @@ body {
 }
 
 .main-nav .menu {
-  list-style: none !important;
-  list-style-type: none !important;
+  list-style: none;
+  list-style-type: none;
   display: flex;
   align-items: center;
   gap: 30px;
@@ -66,7 +66,7 @@ body {
 }
 
 .main-nav ul li {
-  list-style: none !important;
+  list-style: none;
 }
 
 .menu-link {
@@ -81,7 +81,7 @@ body {
   color: var(--rosa-hover);
 }
 
-/* 3. HERO (SECCIÓN SPLIT) */
+
 .hero {
   display: flex;
   align-items: center;
@@ -143,7 +143,7 @@ body {
   box-shadow: 0 10px 25px rgba(216, 180, 226, 0.4);
 }
 
-/* 4. SECCIONES Y CONTENIDOS */
+
 .main-section {
   max-width: 1200px;
   margin: 40px auto;
@@ -159,7 +159,7 @@ body {
   margin-bottom: 30px;
 }
 
-/* Tarjetas sobre nosotros */
+/* Sobre nosotros */
 .sobre-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -189,7 +189,7 @@ body {
   border: 1px solid #f0e6f2;
 }
 
-/* 5. TARJETAS DE PRODUCTOS E-COMMERCE */
+/* CATALOGO DEPRODUCTOS */
 .catalogo {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -270,7 +270,7 @@ body {
   background-color: var(--rosa-hover);
 }
 
-/* 6. FORMULARIO DE CONTACTO LIMPIO */
+/* CONTACTO */
 .contacto-form fieldset {
   border: 1.5px solid var(--lila-pastel);
   background-color: var(--blanco);
@@ -335,7 +335,7 @@ input[type="reset"] {
   color: var(--texto-oscuro);
 }
 
-/* 7. FOOTER */
+/* FOOTER */
 footer {
   text-align: center;
   padding: 30px;
@@ -350,7 +350,7 @@ footer {
   text-decoration: none;
 }
 
-/* RESPONSIVE MÓVIL */
+/* Computador Telefonos */
 @media (max-width: 768px) {
   .main-header, .hero {
     flex-direction: column;
@@ -368,7 +368,7 @@ footer {
   }
 }
 
-/* --- BOTÓN Y DESPLEGABLE EN LAS TARJETAS --- */
+
 details.detalles-producto summary.btn-hero {
   list-style: none; 
   cursor: pointer;
@@ -400,7 +400,7 @@ details.detalles-producto summary.btn-hero::-webkit-details-marker {
 }
 
 .mini-galeria.active-galeria {
-  display: flex !important;
+  display: flex;
   flex-direction: column;
   gap: 15px;
   width: 100%;
