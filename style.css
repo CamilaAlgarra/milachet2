@@ -42,7 +42,13 @@ body {
 
 
 .main-header {
-  background-color: var(--fondo-crema);
+  position: relative;
+  background-image:
+    linear-gradient(rgba(250, 246, 240, 0.88), rgba(250, 246, 240, 0.88)),
+    url("assets/img/Foto_fondo.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -83,31 +89,38 @@ body {
 
 
 .hero {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 50px 8%;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 80px 8%;
   gap: 40px;
+  background-image:
+    linear-gradient(to bottom, rgba(74, 62, 78, 0.55), rgba(74, 62, 78, 0.6)),
+    url("assets/img/Foto_fondo.jpeg");
+  background-size: cover;
+  background-position: center 30%;
+  background-attachment: fixed;
 }
 
 .hero-content {
   flex: 1;
   max-width: 500px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero h2 {
   font-family: var(--fuente-titulo);
   font-size: 2.8rem;
-  color: #5c3866;
+  color: var(--blanco);
   margin: 0 0 15px 0;
   line-height: 1.2;
 }
 
 .hero p {
   font-size: 1.1rem;
-  color: var(--texto-suave);
+  color: var(--lila-pastel);
   margin-bottom: 25px;
 }
 
@@ -131,6 +144,8 @@ body {
   flex: 1;
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-image-container img {
@@ -140,7 +155,7 @@ body {
   object-fit: cover;
   border-radius: 30px;
   background-color: var(--lila-pastel);
-  box-shadow: 0 10px 25px rgba(216, 180, 226, 0.4);
+  box-shadow: 0 20px 40px rgba(74, 62, 78, 0.35);
 }
 
 
@@ -444,7 +459,7 @@ details.detalles-producto summary.btn-hero::-webkit-details-marker {
 .btn-pedir:hover {
   background-color: #5a4b5e;
 }
-/* Estilo seleccionado en la mini-galería */
+
 .item-galeria {
   padding: 6px;
   border-radius: 14px;
@@ -463,4 +478,52 @@ details.detalles-producto summary.btn-hero::-webkit-details-marker {
 .item-galeria.foto-seleccionada figcaption {
   color: var(--rosa-hover);
   font-weight: 600;
+}
+
+
+
+.menu-link.active {
+  color: var(--rosa-hover);
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+
+.btn-hero-outline {
+  background-color: transparent;
+  color: var(--blanco);
+  border: 2px solid var(--blanco);
+  padding: 10px 26px;
+}
+
+.btn-hero-outline:hover {
+  background-color: var(--blanco);
+  color: var(--texto-oscuro);
+}
+
+.hero-image-container.logo-frame img {
+  object-fit: contain;
+  padding: 45px;
+  background-color: var(--blanco);
+}
+
+@media (max-width: 768px) {
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero {
+    background-image:
+      linear-gradient(to bottom, rgba(74, 62, 78, 0.7), rgba(74, 62, 78, 0.75)),
+      url("assets/img/Foto_fondo.jpeg");
+    background-attachment: scroll;
+  }
+
+  .main-header {
+    background-attachment: scroll;
+  }
 }

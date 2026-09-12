@@ -3,251 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milachet</title>
+    <title>Milachet - Inicio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Galindo&family=Satisfy&family=Fraunces:opsz,wght@9..144,300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;400;600&family=Galindo&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Barra de anuncio superior -->
     <div class="announcement-bar">
-        CREACIONES HECHAS A MANO CON AMOR Y DEDICACIÓN
+        Creaciones hechas a mano, con amor y dedicación
     </div>
 
-    <!-- Encabezado con logo, menú alineados -->
     <header class="main-header">
         <div class="header-logo">
-            <img src="assets/img/logo-final.png" alt="Logo de Milachet">
+            <a href="index.html"><img src="assets/img/milachet_letras.png" alt="Logo de Milachet"></a>
         </div>
         <nav class="main-nav">
             <ul class="menu">
-                <li><a href="#sobre" class="menu-link">Sobre nosotros</a></li>
-                <li><a href="#productos" class="menu-link">Productos</a></li>
-                <li><a href="#contacto" class="menu-link">Contacto</a></li>
+                <li><a href="index.html" class="menu-link active">Inicio</a></li>
+                <li><a href="sobre.html" class="menu-link">Sobre nosotros</a></li>
+                <li><a href="productos.html" class="menu-link">Productos</a></li>
+                <li><a href="contacto.html" class="menu-link">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Sección de Hero (La parte de inicio con la imagen) -->
     <section class="hero">
         <div class="hero-content">
             <h2>Creaciones únicas hechas a crochet</h2>
-            <p>Diseños artesanales personalizados con amor, creatividad y dedicación.</p>
-            <a href="#productos" class="btn-hero">Ver Productos</a>
+            <p>Diseños artesanales personalizados con amor, creatividad y dedicación para acompañar tus momentos favoritos.</p>
+            <div class="hero-buttons">
+                <a href="productos.html" class="btn-hero">Ver productos</a>
+                <a href="sobre.html" class="btn-hero btn-hero-outline">Conócenos</a>
+            </div>
         </div>
-        <div class="hero-image-container">
+        <div class="hero-image-container logo-frame">
             <img src="assets/img/logo-final.png" alt="Logo de Milachet">
         </div>
     </section>
-
-    <!-- Sección "Sobre Nosotros" -->
-    <section id="sobre" class="main-section">
-        <div class="section-title-wrapper">
-            <h2>Sobre nosotros</h2>
-        </div>
-        
-        <div class="sobre-grid">
-            <div class="info-card">
-                <h3>¿Qué es Milachet?</h3>
-                <p>Milachet es un emprendimiento dedicado a la creación y venta de productos tejidos a crochet con diseños personalizados.</p>
-            </div>
-            <div class="info-card">
-                <h3>Misión</h3>
-                <p>Diseñar y comercializar productos tejidos a crochet que reflejen creatividad, calidad y dedicación.</p>
-            </div>
-            <div class="info-card">
-                <h3>Visión</h3>
-                <p>Ser una marca reconocida por la calidad y creatividad de nuestros productos.</p>
-            </div>
-        </div>
-
-        <div class="objetivos-card">
-            <h3>Objetivos</h3>
-            <ol>
-                <li>Ofrecer productos de calidad.</li>
-                <li>Generar confianza en nuestros clientes.</li>
-                <li>Crear una comunidad de amantes del crochet.</li>
-            </ol>
-        </div>
-    </section>
-
-    <!-- Sección Productos -->
-    <section id="productos" class="main-section">
-       <div class="section-title-wrapper">
-            <h2>Productos</h2>
-        </div>
-
-   <div class="catalogo">
-            
-            <!-- BUFANDA -->
-            <div class="producto">
-                <div class="producto-img-placeholder">
-                    <img src="assets/img/Bufanda-Dos-Colores.jpeg" alt="Bufanda">
-                </div>
-                <div class="producto-info">
-                    <h3>Bufanda</h3>
-                    <p>Bufanda tejida a crochet con diseño personalizado.</p>
-                    <span class="precio">$45.000</span>
-
-                    <details class="detalles-producto">
-                        <summary class="btn-hero">Ver Estilos</summary>
-                        <div class="contenido-desplegable">
-                            <p class="titulo-estilos">Estilos:</p>
-                            <div class="mini-galeria active-galeria">
-                                <figure class="item-galeria">
-                                    <img src="assets/img/Bufanda-Dos-Colores.jpeg" alt="Bufanda Dos Tonos" onclick="seleccionarFoto(this, 'Bufanda Dos Tonos')">
-                                    <figcaption>Bufanda Dos Tonos</figcaption>
-                                </figure>
-                            </div>
-                            <a href="#contacto" class="btn-pedir">Pedir</a>
-                        </div>
-                    </details>
-                </div>
-            </div>
-
-            <div class="producto">
-                <div class="producto-img-placeholder">
-                    <img src="assets/img/Bolso-Morado-Flores.jpeg" alt="Bolso">
-                </div>
-                <div class="producto-info">
-                    <h3>Bolso</h3>
-                    <p>Bolso tejido a crochet con diseño personalizado.</p>
-                    <span class="precio">$65.000</span>
-
-                    <details class="detalles-producto">
-                        <summary class="btn-hero">Ver Estilos</summary>
-                        <div class="contenido-desplegable">
-                            <p class="titulo-estilos">Estilos:</p>
-                            <div class="mini-galeria active-galeria">
-                                <figure class="item-galeria">
-                                    <img src="assets/img/Bolso-Morado-Flores.jpeg" alt="Bolso Flores" onclick="seleccionarFoto(this, 'Bolso Morado Flores')">
-                                    <figcaption>Bolso de Flores</figcaption>
-                                </figure>
-                                <figure class="item-galeria">
-                                    <img src="assets/img/Bolso-Granny.jpeg" alt="Bolso Granny" onclick="seleccionarFoto(this, 'Bolso Granny')">
-                                    <figcaption>Bolso Granny</figcaption>
-                                </figure>
-                            </div>
-                            <a href="#contacto" class="btn-pedir">Pedir</a>
-                        </div>
-                    </details>
-                </div>
-            </div>
-
-            <div class="producto">
-                <div class="producto-img-placeholder">
-                    <img src="assets/img/Llavero_personalizado.jpeg" alt="Llaveros">
-                </div>
-                <div class="producto-info">
-                    <h3>Llaveros</h3>
-                    <p>Llaveros tejidos con diseños personalizados.</p>
-                    <span class="precio">Según diseño</span>
-
-                    <details class="detalles-producto">
-                        <summary class="btn-hero">Ver Estilos</summary>
-                        <div class="contenido-desplegable">
-                            <p class="titulo-estilos">Estilos:</p>
-                            <div class="mini-galeria active-galeria">
-                                <figure class="item-galeria">
-                                    <img src="assets/img/logo-final.png" alt="Llavero Personalizado" onclick="seleccionarFoto(this, 'Llavero Personalizado')">
-                                    <figcaption>Llavero Personalizado</figcaption>
-                                </figure>
-                            </div>
-                            <a href="#contacto" class="btn-pedir">Pedir</a>
-                        </div>
-                    </details>
-                </div>
-            </div>
-
-            <div class="producto">
-                <div class="producto-img-placeholder">
-                    <img src="assets/img/Separador-de-Colombia.jpeg" alt="Separadores">
-                </div>
-                <div class="producto-info">
-                    <h3>Separadores</h3>
-                    <p>Separadores tejidos a crochet.</p>
-                    <span class="precio">$15.000</span>
-
-                    <details class="detalles-producto">
-                        <summary class="btn-hero">Ver Estilos</summary>
-                        <div class="contenido-desplegable">
-                            <p class="titulo-estilos">Estilos:</p>
-                            <div class="mini-galeria active-galeria">
-                                <figure class="item-galeria">
-                                    <img src="assets/img/Separador-de-Colombia.jpeg" alt="Separador Bandera" onclick="seleccionarFoto(this, 'Separador Colombia')">
-                                    <figcaption>Separador Colombia</figcaption>
-                                </figure>
-                            </div>
-                            <a href="#contacto" class="btn-pedir">Pedir</a>
-                        </div>
-                    </details>
-                </div>
-            </div>
-
-            <div class="producto">
-                <div class="producto-img-placeholder">
-                    <img src="assets/img/Aretes-Circulo-Medio.jpeg" alt="Aretes">
-                </div>
-                <div class="producto-info">
-                    <h3>Aretes</h3>
-                    <p>Aretes tejidos con diseños personalizados.</p>
-                    <span class="precio">$15.000</span>
-
-                    <details class="detalles-producto">
-                        <summary class="btn-hero">Ver Estilos</summary>
-                        <div class="contenido-desplegable">
-                            <p class="titulo-estilos">Estilos:</p>
-                            <div class="mini-galeria active-galeria">
-                                <figure class="item-galeria">
-                                    <img src="assets/img/Aretes-Circulo-Medio.jpeg" alt="Aretes Círculo" onclick="seleccionarFoto(this, 'Aretes Círculo')">
-                                    <figcaption>Aretes Círculo Medio</figcaption>
-                                </figure>
-                                <figure class="item-galeria">
-                                    <img src="assets/img/Aretes-Flor.jpeg" alt="Aretes Flor" onclick="seleccionarFoto(this, 'Aretes Flor')">
-                                    <figcaption>Aretes Flor</figcaption>
-                                </figure>
-                            </div>
-                            <a href="#contacto" class="btn-pedir">Pedir</a>
-                        </div>
-                    </details>
-                </div>
-            </div>
-
-        </div>
-
-    <section id="contacto" class="main-section">
-        <div class="section-title-wrapper">
-            <h2>Contáctanos</h2>
-        </div>
-
-        <form class="contacto-form">
-            <fieldset>
-                <legend>Información de Contacto</legend>
-                
-                <div class="form-group">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="apellido">Apellido:</label>
-                    <input type="text" id="apellido" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="producto">Producto de interés:</label>
-                    <input type="text" id="producto" placeholder=" Bolso Granny, Bufanda Dos Tonos, etc.">
-                </div>
-
-                <div class="form-actions">
-                    <button type="button" class="btn-hero btn-whatsapp" onclick="enviarWhatsApp()">Enviar a mi WhatsApp</button>
-                    <input type="reset" value="limpiar">
-                </div>
-            </fieldset>
-        </form>
-    </section>
+    
 
     <footer>
         <p class="instagram-text">
@@ -256,6 +51,7 @@
         </p>
         <p>&copy; 2026 Milachet. Todos los derechos reservados.</p>
     </footer>
-  <script src="script.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>

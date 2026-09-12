@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milachet - Contacto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;400;600&family=Galindo&family=Satisfy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="announcement-bar">
+        CREACIONES HECHAS A MANO CON AMOR Y DEDICACIÓN
+    </div>
+
+    <!-- Encabezado fijo -->
+    <header class="main-header">
+        <div class="header-logo">
+            <a href="index.html"><img src="assets/img/logo-final.png" alt="Logo de Milachet"></a>
+        </div>
+        <nav class="main-nav">
+            <ul class="menu">
+                <li><a href="index.html" class="menu-link">Inicio</a></li>
+                <li><a href="sobre.html" class="menu-link">Sobre nosotros</a></li>
+                <li><a href="productos.html" class="menu-link">Productos</a></li>
+                <li><a href="contacto.html" class="menu-link active">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="contacto" class="main-section">
+        <div class="section-title-wrapper">
+            <h2>Contáctanos</h2>
+        </div>
+
+        <form class="contacto-form">
+            <fieldset>
+                <legend>Información de Contacto</legend>
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="producto">Producto de interés:</label>
+                    <input type="text" id="producto" placeholder="Bolso Granny, Bufanda Dos Tonos, etc.">
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-hero btn-whatsapp" onclick="enviarWhatsApp()">Enviar a mi WhatsApp</button>
+                    <input type="reset" value="Limpiar">
+                </div>
+            </fieldset>
+        </form>
+    </section>
+
+    <footer>
+        <p class="instagram-text">
+            Síguenos en Instagram:
+            <a href="https://www.instagram.com/milachett/" target="_blank">@milachett</a>
+        </p>
+        <p>&copy; 2026 Milachet. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
