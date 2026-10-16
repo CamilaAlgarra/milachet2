@@ -56,7 +56,7 @@ body {
 }
 
 .header-logo img {
-  width: 140px;
+  width: 150px;
   height: auto;
   display: block;
 }
@@ -96,7 +96,7 @@ body {
   padding: 80px 8%;
   gap: 40px;
   background-image:
-    linear-gradient(to bottom, rgba(74, 62, 78, 0.55), rgba(74, 62, 78, 0.6)),
+    linear-gradient(to bottom, rgba(74, 62, 78, 0.75), rgba(74, 62, 78, 0.8)),
     url("assets/img/Foto_fondo.jpeg");
   background-size: cover;
   background-position: center 30%;
@@ -113,6 +113,13 @@ body {
 .hero h2 {
   font-family: var(--fuente-titulo);
   font-size: 2.8rem;
+  color: var(--blanco);
+  margin: 0 0 15px 0;
+  line-height: 1.2;
+}
+.hero h3 {
+  font-family: var(--fuente-titulo);
+  font-size: 1.5rem;
   color: var(--blanco);
   margin: 0 0 15px 0;
   line-height: 1.2;
@@ -481,7 +488,6 @@ details.detalles-producto summary.btn-hero::-webkit-details-marker {
 }
 
 
-
 .menu-link.active {
   color: var(--rosa-hover);
 }
@@ -508,9 +514,10 @@ details.detalles-producto summary.btn-hero::-webkit-details-marker {
 .hero-image-container.logo-frame img {
   object-fit: contain;
   padding: 45px;
-  background-color: var(--blanco);
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
 }
-
 @media (max-width: 768px) {
   .hero-buttons {
     justify-content: center;
