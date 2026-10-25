@@ -1,91 +1,129 @@
+require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
+const Producto = require('./modelos/Producto');
+const Contacto = require('./modelos/Contacto');
+
 const app = express();
+
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log('Conectado a MongoDB'))
+    .catch((error) => console.error('Error al conectar a MongoDB:', error.message));
 
 app.use(express.json());
 app.use(express.static('public'));
 
-const productos = [
-    { id: 1, nombre: 'Bufanda', precio: 45000 },
-    { id: 2, nombre: 'Bolso', precio: 65000 },
-    { id: 3, nombre: 'Separadores', precio: 15000 },
-    { id: 4, nombre: 'Aretes', precio: 15000 },
-];
+// GET TODOS LOS PRODUCTOS//
+app.get('/api/productos', async (req, res) => {
+    try {
+        const { nombre } = req.query;
+        const filtro = {};
 
+        if (nombre) {
+            const seguro = String(nombre).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            filtro.nombre = { $regex: seguro, $options: 'i' };
+        }
 
-app.get('/api/productos', (req, res) => {
-    const { nombre } = req.query;
-
-    if (nombre) {
-        const filtrados = productos.filter((p) =>
-            p.nombre.toLowerCase().includes(nombre.toLowerCase())
-        );
-        return res.json(filtrados);
+        const productos = await Producto.find(filtro);
+        res.json(productos);
+    } catch (error) {
+        res.status(500).json({ error: 'Error del servidor' });
     }
-
-    res.json(productos);
 });
 
+// GET SOLO UN PRODUCTO POR ID//
+app.get('/api/productos/:id', async (req, res) => {
+    try {
+        if (!mongoose.isValidObjectId(req.params.id)) {
+            return res.status(400).json({ error: 'Id inválido' });
+        }
 
-app.get('/api/productos/:id', (req, res) => {
-    const id = Number(req.params.id);
-    const producto = productos.find((p) => p.id === id);
+        const producto = await Producto.findById(req.params.id);
 
-    if (!producto) {
-        return res.status(404).json({ error: 'Producto no encontrado' });
+        if (!producto) {
+            return res.status(404).json({ error: 'Producto no encontrado' });
+        }
+
+        res.json(producto);
+    } catch (error) {
+        res.status(500).json({ error: 'Error del servidor' });
     }
-
-    res.json(producto);
 });
 
-app.post('/api/productos', (req, res) => {
-    const { nombre, precio } = req.body;
-
-    // Validación: nombre obligatorio y precio numérico
-    if (!nombre || typeof precio !== 'number') {
-        return res.status(400).json({ error: 'Se requiere nombre y precio (número)' });
+// POST //
+app.post('/api/productos', async (req, res) => {
+    try {
+        const { nombre, precio } = req.body;
+        const nuevo = await Producto.create({ nombre, precio });
+        res.status(201).json(nuevo);
+    } catch (error) {
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ error: 'Se requiere nombre y precio (número)' });
+        }
+        res.status(500).json({ error: 'Error del servidor' });
     }
-
-    const nuevo = {
-        id: productos.length ? productos[productos.length - 1].id + 1 : 1,
-        nombre,
-        precio,
-    };
-
-    productos.push(nuevo);
-    res.status(201).json(nuevo);
 });
 
-app.put('/api/productos/:id', (req, res) => {
-    const id = Number(req.params.id);
-    const producto = productos.find((p) => p.id === id);
+// PUT //
+app.put('/api/productos/:id', async (req, res) => {
+    try {
+        if (!mongoose.isValidObjectId(req.params.id)) {
+            return res.status(400).json({ error: 'Id inválido' });
+        }
 
-    if (!producto) {
-        return res.status(404).json({ error: 'Producto no encontrado' });
+        const cambios = {};
+        if (req.body.nombre !== undefined) cambios.nombre = req.body.nombre;
+        if (req.body.precio !== undefined) cambios.precio = req.body.precio;
+
+        const producto = await Producto.findByIdAndUpdate(req.params.id, cambios, {
+            new: true,
+            runValidators: true
+        });
+
+        if (!producto) {
+            return res.status(404).json({ error: 'Producto no encontrado' });
+        }
+
+        res.json(producto);
+    } catch (error) {
+        if (error.name === 'ValidationError' || error.name === 'CastError') {
+            return res.status(400).json({ error: 'Datos inválidos' });
+        }
+        res.status(500).json({ error: 'Error del servidor' });
     }
-
-    const { nombre, precio } = req.body;
-
-    if (precio !== undefined && typeof precio !== 'number') {
-        return res.status(400).json({ error: 'El precio debe ser un número' });
-    }
-
-    if (nombre !== undefined) producto.nombre = nombre;
-    if (precio !== undefined) producto.precio = precio;
-
-    res.json(producto);
 });
 
+// DELETE//
+app.delete('/api/productos/:id', async (req, res) => {
+    try {
+        if (!mongoose.isValidObjectId(req.params.id)) {
+            return res.status(400).json({ error: 'Id inválido' });
+        }
 
-app.delete('/api/productos/:id', (req, res) => {
-    const id = Number(req.params.id);
-    const indice = productos.findIndex((p) => p.id === id);
+        const eliminado = await Producto.findByIdAndDelete(req.params.id);
 
-    if (indice === -1) {
-        return res.status(404).json({ error: 'Producto no encontrado' });
+        if (!eliminado) {
+            return res.status(404).json({ error: 'Producto no encontrado' });
+        }
+
+        res.json({ mensaje: 'Producto eliminado', producto: eliminado });
+    } catch (error) {
+        res.status(500).json({ error: 'Error del servidor' });
     }
+});
 
-    const eliminado = productos.splice(indice, 1)[0];
-    res.json({ mensaje: 'Producto eliminado', producto: eliminado });
+// POST GUARDAR EL CONTACTO//
+app.post('/api/contactos', async (req, res) => {
+    try {
+        const { nombre, apellido, producto } = req.body;
+        await Contacto.create({ nombre, apellido, producto });
+        res.status(201).json({ mensaje: 'Contacto guardado' });
+    } catch (error) {
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ error: 'Nombre y apellido son obligatorios' });
+        }
+        res.status(500).json({ error: 'Error del servidor' });
+    }
 });
 
 app.listen(3000, () => {
