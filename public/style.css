@@ -534,3 +534,19 @@ details.detalles-producto summary.btn-hero::-webkit-details-marker {
     background-attachment: scroll;
   }
 }
+
+/* Sesión */
+.menu .btn-hero {
+  padding: 8px 20px;
+  font-size: 0.9rem;
+}
+
+#form-login .btn-hero,
+#form-registro .btn-hero {
+  border: none;
+  cursor: pointer;
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+}
+
+

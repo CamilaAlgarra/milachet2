@@ -15,7 +15,6 @@
         CREACIONES HECHAS A MANO CON AMOR Y DEDICACIÓN
     </div>
 
-    <!-- Encabezado fijo -->
     <header class="main-header">
         <div class="header-logo">
             <a href="index.html"><img src="assets/img/milachet_letras.png" alt="Logo de Milachet"></a>
@@ -37,25 +36,25 @@
 
         <form class="contacto-form">
             <fieldset>
-                <legend>Información de Contacto</legend>
-                
+                <legend>Haz tu pedido</legend>
+
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="apellido">Apellido:</label>
-                    <input type="text" id="apellido" required>
+                    <label for="telefono">Teléfono de contacto:</label>
+                    <input type="tel" id="telefono" placeholder="Ej: 3001234567" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="producto">Producto de interés:</label>
+                    <label for="producto">Producto:</label>
                     <input type="text" id="producto" placeholder="Bolso Granny, Bufanda Dos Tonos, etc.">
                 </div>
 
                 <div class="form-actions">
-                    <button type="button" class="btn-hero btn-whatsapp" onclick="enviarWhatsApp()">Enviar a mi WhatsApp</button>
+                    <button type="button" class="btn-hero btn-whatsapp" onclick="pedir()">Pedir</button>
                     <input type="reset" value="Limpiar">
                 </div>
             </fieldset>
@@ -70,6 +69,7 @@
         <p>&copy; 2026 Milachet. Todos los derechos reservados.</p>
     </footer>
 
+    <script src="auth.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
