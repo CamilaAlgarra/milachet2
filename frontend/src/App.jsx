@@ -9,6 +9,9 @@ import Contacto from "./pages/Contacto";
 function App() {
   return (
     <>
+    <div className="announcement-bar">
+  CREACIONES HECHAS A MANO CON AMOR Y DEDICACIÓN
+</div>
       <Navbar />
       <main>
         <Routes>
