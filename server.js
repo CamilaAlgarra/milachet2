@@ -1,23 +1,25 @@
-
+//1. Carga las variables de .env//
+//2. Traen herramientas del servidor y de la base de datos//
 require('dotenv').config();
 const rateLimit = require('express-rate-limit');
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+//Importa los modelos de la base de datos//
 const Producto = require('./modelos/Producto');
 const Contacto = require('./modelos/Contacto');
 const Usuario = require('./modelos/Usuario');
 const Pedido = require('./modelos/Pedido');
-
+//Crea la aplicación de Express//
 const app = express();
-
+//Conecta a la base de datos MongoDB//
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Conectado a MongoDB'))
     .catch((error) => console.error('Error al conectar a MongoDB:', error.message));
-
+//Permite leer cuerpos JSON en las peticiones y limita su tamaño a 10kb para evitar abusos//
 app.use(express.json({ limit: '10kb' }));
-
+//Configura la limitación de velocidad para prevenir ataques de fuerza bruta//
 const limiteAcceso = rateLimit({
     windowMs: 15 * 60 * 1000,
     limit: 10,
@@ -27,12 +29,12 @@ const limiteAcceso = rateLimit({
         error: 'Demasiados intentos. Intenta nuevamente en 15 minutos.'
     }
 });
-
+//Valida el formato del telefono y define una función para limpiar y limitar la longitud de los valores//
 const REGEX_TELEFONO = /^[0-9+\s()-]{7,20}$/;
 const limpiar = (valor, max) => String(valor || '').trim().slice(0, max);
 
 
-
+//Funciones de middleware para verificar tokens y roles de usuario//
 function verificarToken(req, res, next) {
     const cabecera = req.headers.authorization || '';
 
@@ -59,7 +61,7 @@ function verificarToken(req, res, next) {
         });
     }
 }
-
+//Ejemplo de middleware para restringir el acceso a ciertas rutas solo a administradores//
 function soloAdmin(req, res, next) {
     verificarToken(req, res, async () => {
         try {
@@ -88,7 +90,7 @@ function soloAdmin(req, res, next) {
         }
     });
 }
-
+//Todos los productos se pueden consultar sin autenticación, pero para crear, actualizar o eliminar productos se requiere ser administrador//
 app.get('/api/productos', async (req, res) => {
     try {
         const { nombre } = req.query;
@@ -105,7 +107,7 @@ app.get('/api/productos', async (req, res) => {
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
-
+//Valida que el id sea válido y que el producto exista antes de devolverlo. Si no, devuelve un error 404. Para crear, actualizar o eliminar productos se requiere ser administrador//
 app.get('/api/productos/:id', async (req, res) => {
     try {
         if (!mongoose.isValidObjectId(req.params.id)) {
@@ -123,7 +125,7 @@ app.get('/api/productos/:id', async (req, res) => {
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
-
+//Crea un nuevo producto, actualiza un producto existente o elimina un producto. Estas rutas requieren autenticación y autorización de administrador. Se manejan errores de validación y errores del servidor de manera adecuada//
 app.post('/api/productos', soloAdmin, async (req, res) => {
     try {
         const { nombre, precio } = req.body;
@@ -136,7 +138,7 @@ app.post('/api/productos', soloAdmin, async (req, res) => {
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
-
+//Valida el id, arma solo los campos enviados (nombre y precio) y actualiza el producto. Devuelve un error 404 si no se encuentra el producto. Maneja errores de validación y errores del servidor//
 app.put('/api/productos/:id', soloAdmin, async (req, res) => {
     try {
         if (!mongoose.isValidObjectId(req.params.id)) {
@@ -164,7 +166,7 @@ app.put('/api/productos/:id', soloAdmin, async (req, res) => {
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
-
+//Valida el id y elimina el producto. Devuelve un error 404 si no se encuentra el producto. Maneja errores del servidor//
 app.delete('/api/productos/:id', soloAdmin, async (req, res) => {
     try {
         if (!mongoose.isValidObjectId(req.params.id)) {
@@ -184,7 +186,7 @@ app.delete('/api/productos/:id', soloAdmin, async (req, res) => {
 });
 
 
-
+//Limpia, valida nombre, apellido y producto. Guarda el contacto en MongoDB y responde 201 si todo va bien. Maneja errores de validación y errores del servidor//
 app.post('/api/contactos', async (req, res) => {
     try {
         const nombre = limpiar(req.body.nombre, 80);
@@ -229,7 +231,7 @@ app.post('/api/contactos', async (req, res) => {
     }
 });
 
-
+//Obtiene todos los contactos de la base de datos, ordenados por fecha descendente. Esta ruta requiere autenticación y autorización de administrador. Maneja errores del servidor//
 app.get('/api/contactos', soloAdmin, async (req, res) => {
     try {
         const contactos = await Contacto.find().sort({ fecha: -1 });
@@ -239,9 +241,7 @@ app.get('/api/contactos', soloAdmin, async (req, res) => {
     }
 });
 
-
-
-
+//Limpia y valida nombre, email y contraseña. Cifra la contraseña y guarda el usuario en MongoDB. Devuelve un error 409 si el correo ya está registrado. Maneja errores de validación y errores del servidor//
 app.post('/api/auth/registro', limiteAcceso, async (req, res) => {
     try {
         const nombre = limpiar(req.body.nombre, 80);
@@ -303,7 +303,7 @@ app.post('/api/auth/registro', limiteAcceso, async (req, res) => {
     }
 });
 
-
+//Valida correo y contraseña. verifica JWT-SECRET y devuelve un token JWT si las credenciales son correctas. Maneja errores de validación, autenticación y errores del servidor//
 app.post('/api/auth/login', limiteAcceso, async (req, res) => {
     try {
         const correo = String(req.body.email || '').trim().toLowerCase();
@@ -357,7 +357,7 @@ app.post('/api/auth/login', limiteAcceso, async (req, res) => {
         });
     }
 });
-
+//Busca el usuario autenticado por su id y excluye su contraseña//. Devuelve un error 404 si no se encuentra el usuario. Maneja errores del servidor//
 app.get('/api/perfil', verificarToken, async (req, res) => {
     try {
         const usuario = await Usuario.findById(req.usuario.id).select('-password');
@@ -371,7 +371,7 @@ app.get('/api/perfil', verificarToken, async (req, res) => {
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
-
+//Valida y actualiza nombre y teléfono del usuario autenticado. Devuelve un error 400 si los datos son inválidos y un error 404 si no se encuentra el usuario. Maneja errores del servidor//
 app.put('/api/perfil', verificarToken, async (req, res) => {
     try {
         const cambios = {
@@ -403,7 +403,7 @@ app.put('/api/perfil', verificarToken, async (req, res) => {
 });
 
 
-
+//Valida y registra un nuevo pedido. Actualiza el teléfono del usuario si está vacío. Devuelve un error 400 si los datos son inválidos y un error 500 si ocurre un error del servidor//
 app.post('/api/pedidos', verificarToken, async (req, res) => {
     try {
         const nombre = limpiar(req.body.nombre, 80);
@@ -460,7 +460,7 @@ app.post('/api/pedidos', verificarToken, async (req, res) => {
     }
 });
 
-
+//Devuelve los pedidos agregando nombre y correo, ordenados por el mas reciente al más antiguo//
 app.get('/api/pedidos/mios', verificarToken, async (req, res) => {
     try {
         const pedidos = await Pedido.find({ usuario: req.usuario.id }).sort({ fecha: -1 });
@@ -469,7 +469,7 @@ app.get('/api/pedidos/mios', verificarToken, async (req, res) => {
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
-
+//Devuelve todos los pedidos agregando nombre y correo, ordenados por el mas reciente al más antiguo. Esta ruta requiere autenticación y autorización de administrador//
 app.get('/api/pedidos', soloAdmin, async (req, res) => {
     try {
         const pedidos = await Pedido.find()
@@ -481,7 +481,7 @@ app.get('/api/pedidos', soloAdmin, async (req, res) => {
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
-
+//Valida el id y comprueba el estado del pedido antes de actualizarlo//
 app.patch('/api/pedidos/:id', soloAdmin, async (req, res) => {
     try {
         if (!mongoose.isValidObjectId(req.params.id)) {
@@ -510,6 +510,7 @@ app.patch('/api/pedidos/:id', soloAdmin, async (req, res) => {
     }
 });
 
+//Levanta el servidor en el puerto 3000 y muestra un mensaje en la consola indicando que está corriendo//
 app.listen(3000, () => {
     console.log('Servidor en http://localhost:3000');
 });
