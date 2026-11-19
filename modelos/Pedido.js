@@ -31,12 +31,6 @@ const pedidoSchema = new mongoose.Schema({
         minlength: 2,
         maxlength: 120
     },
-    //Guarda la cantidad del producto que se está pidiendo//
-    cantidad: {
-        type: Number,
-        required: true,
-        min: 1
-    },
     //Guarda el estado del pedido//
     estado: {
         type: String,

@@ -6,19 +6,24 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
 //Importa los modelos de la base de datos//
 const Producto = require('./modelos/Producto');
 const Contacto = require('./modelos/Contacto');
 const Usuario = require('./modelos/Usuario');
 const Pedido = require('./modelos/Pedido');
+
 //Crea la aplicación de Express//
 const app = express();
+
 //Conecta a la base de datos MongoDB//
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Conectado a MongoDB'))
     .catch((error) => console.error('Error al conectar a MongoDB:', error.message));
+
 //Permite leer cuerpos JSON en las peticiones y limita su tamaño a 10kb para evitar abusos//
 app.use(express.json({ limit: '10kb' }));
+
 //Configura la limitación de velocidad para prevenir ataques de fuerza bruta//
 const limiteAcceso = rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -29,10 +34,10 @@ const limiteAcceso = rateLimit({
         error: 'Demasiados intentos. Intenta nuevamente en 15 minutos.'
     }
 });
+
 //Valida el formato del telefono y define una función para limpiar y limitar la longitud de los valores//
 const REGEX_TELEFONO = /^[0-9+\s()-]{7,20}$/;
 const limpiar = (valor, max) => String(valor || '').trim().slice(0, max);
-
 
 //Funciones de middleware para verificar tokens y roles de usuario//
 function verificarToken(req, res, next) {
@@ -52,6 +57,13 @@ function verificarToken(req, res, next) {
         });
     }
 
+    if (!process.env.JWT_SECRET) {
+        console.error('Falta configurar JWT_SECRET');
+        return res.status(500).json({
+            error: 'Error de configuración del servidor'
+        });
+    }
+
     try {
         req.usuario = jwt.verify(token, process.env.JWT_SECRET);
         next();
@@ -61,6 +73,7 @@ function verificarToken(req, res, next) {
         });
     }
 }
+
 //Ejemplo de middleware para restringir el acceso a ciertas rutas solo a administradores//
 function soloAdmin(req, res, next) {
     verificarToken(req, res, async () => {
@@ -90,6 +103,7 @@ function soloAdmin(req, res, next) {
         }
     });
 }
+
 //Todos los productos se pueden consultar sin autenticación, pero para crear, actualizar o eliminar productos se requiere ser administrador//
 app.get('/api/productos', async (req, res) => {
     try {
@@ -104,9 +118,11 @@ app.get('/api/productos', async (req, res) => {
         const productos = await Producto.find(filtro);
         res.json(productos);
     } catch (error) {
+        console.error('Error al consultar productos:', error);
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
+
 //Valida que el id sea válido y que el producto exista antes de devolverlo. Si no, devuelve un error 404. Para crear, actualizar o eliminar productos se requiere ser administrador//
 app.get('/api/productos/:id', async (req, res) => {
     try {
@@ -122,9 +138,11 @@ app.get('/api/productos/:id', async (req, res) => {
 
         res.json(producto);
     } catch (error) {
+        console.error('Error al obtener producto:', error);
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
+
 //Crea un nuevo producto, actualiza un producto existente o elimina un producto. Estas rutas requieren autenticación y autorización de administrador. Se manejan errores de validación y errores del servidor de manera adecuada//
 app.post('/api/productos', soloAdmin, async (req, res) => {
     try {
@@ -135,9 +153,11 @@ app.post('/api/productos', soloAdmin, async (req, res) => {
         if (error.name === 'ValidationError') {
             return res.status(400).json({ error: 'Se requiere nombre y precio (número)' });
         }
+        console.error('Error al crear producto:', error);
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
+
 //Valida el id, arma solo los campos enviados (nombre y precio) y actualiza el producto. Devuelve un error 404 si no se encuentra el producto. Maneja errores de validación y errores del servidor//
 app.put('/api/productos/:id', soloAdmin, async (req, res) => {
     try {
@@ -163,9 +183,11 @@ app.put('/api/productos/:id', soloAdmin, async (req, res) => {
         if (error.name === 'ValidationError' || error.name === 'CastError') {
             return res.status(400).json({ error: 'Datos inválidos' });
         }
+        console.error('Error al actualizar producto:', error);
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
+
 //Valida el id y elimina el producto. Devuelve un error 404 si no se encuentra el producto. Maneja errores del servidor//
 app.delete('/api/productos/:id', soloAdmin, async (req, res) => {
     try {
@@ -181,10 +203,10 @@ app.delete('/api/productos/:id', soloAdmin, async (req, res) => {
 
         res.json({ mensaje: 'Producto eliminado', producto: eliminado });
     } catch (error) {
+        console.error('Error al eliminar producto:', error);
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
-
 
 //Limpia, valida nombre, apellido y producto. Guarda el contacto en MongoDB y responde 201 si todo va bien. Maneja errores de validación y errores del servidor//
 app.post('/api/contactos', async (req, res) => {
@@ -215,7 +237,6 @@ app.post('/api/contactos', async (req, res) => {
             mensaje: 'Contacto guardado correctamente',
             contacto
         });
-
     } catch (error) {
         console.error('Error al guardar contacto:', error);
 
@@ -237,6 +258,7 @@ app.get('/api/contactos', soloAdmin, async (req, res) => {
         const contactos = await Contacto.find().sort({ fecha: -1 });
         res.json(contactos);
     } catch (error) {
+        console.error('Error al consultar contactos:', error);
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
@@ -287,7 +309,6 @@ app.post('/api/auth/registro', limiteAcceso, async (req, res) => {
         res.status(201).json({
             mensaje: 'Cuenta creada correctamente'
         });
-
     } catch (error) {
         if (error.code === 11000) {
             return res.status(409).json({
@@ -348,7 +369,6 @@ app.post('/api/auth/login', limiteAcceso, async (req, res) => {
                 rol: usuario.rol
             }
         });
-
     } catch (error) {
         console.error('Error en inicio de sesión:', error);
 
@@ -357,6 +377,7 @@ app.post('/api/auth/login', limiteAcceso, async (req, res) => {
         });
     }
 });
+
 //Busca el usuario autenticado por su id y excluye su contraseña//. Devuelve un error 404 si no se encuentra el usuario. Maneja errores del servidor//
 app.get('/api/perfil', verificarToken, async (req, res) => {
     try {
@@ -368,9 +389,11 @@ app.get('/api/perfil', verificarToken, async (req, res) => {
 
         res.json(usuario);
     } catch (error) {
+        console.error('Error al obtener perfil:', error);
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
+
 //Valida y actualiza nombre y teléfono del usuario autenticado. Devuelve un error 400 si los datos son inválidos y un error 404 si no se encuentra el usuario. Maneja errores del servidor//
 app.put('/api/perfil', verificarToken, async (req, res) => {
     try {
@@ -398,10 +421,13 @@ app.put('/api/perfil', verificarToken, async (req, res) => {
 
         res.json(usuario);
     } catch (error) {
+        if (error.name === 'ValidationError' || error.name === 'CastError') {
+            return res.status(400).json({ error: 'Datos inválidos' });
+        }
+        console.error('Error al actualizar perfil:', error);
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
-
 
 //Valida y registra un nuevo pedido. Actualiza el teléfono del usuario si está vacío. Devuelve un error 400 si los datos son inválidos y un error 500 si ocurre un error del servidor//
 app.post('/api/pedidos', verificarToken, async (req, res) => {
@@ -450,8 +476,14 @@ app.post('/api/pedidos', verificarToken, async (req, res) => {
             mensaje: 'Pedido registrado correctamente',
             pedido
         });
-
     } catch (error) {
+        console.log('ERROR DETALLADO DEL PEDIDO:', error);
+        if (error.name === 'ValidationError' || error.name === 'CastError') {
+            return res.status(400).json({
+                error: 'Revisa los datos del pedido'
+            });
+        }
+
         console.error('Error al crear pedido:', error);
 
         res.status(500).json({
@@ -466,9 +498,11 @@ app.get('/api/pedidos/mios', verificarToken, async (req, res) => {
         const pedidos = await Pedido.find({ usuario: req.usuario.id }).sort({ fecha: -1 });
         res.json(pedidos);
     } catch (error) {
+        console.error('Error al consultar mis pedidos:', error);
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
+
 //Devuelve todos los pedidos agregando nombre y correo, ordenados por el mas reciente al más antiguo. Esta ruta requiere autenticación y autorización de administrador//
 app.get('/api/pedidos', soloAdmin, async (req, res) => {
     try {
@@ -478,9 +512,11 @@ app.get('/api/pedidos', soloAdmin, async (req, res) => {
 
         res.json(pedidos);
     } catch (error) {
+        console.error('Error al consultar todos los pedidos:', error);
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
+
 //Valida el id y comprueba el estado del pedido antes de actualizarlo//
 app.patch('/api/pedidos/:id', soloAdmin, async (req, res) => {
     try {
@@ -506,6 +542,10 @@ app.patch('/api/pedidos/:id', soloAdmin, async (req, res) => {
 
         res.json(pedido);
     } catch (error) {
+        if (error.name === 'ValidationError' || error.name === 'CastError') {
+            return res.status(400).json({ error: 'Estado o datos inválidos' });
+        }
+        console.error('Error al actualizar pedido:', error);
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
